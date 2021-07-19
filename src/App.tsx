@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import useIntersectionObserver from './hooks/useIntersectionObserver';
 
-import { getPokemons } from 'api/api';
+import { getPokemons } from 'api';
 
 import { Pokemon } from './interfaces/interface.pokemon';
 

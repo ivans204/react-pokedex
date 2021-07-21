@@ -10,7 +10,7 @@ import { getPokemons } from 'api';
 
 import { Pokemon } from '../interfaces/interface.pokemon';
 
-const PokemonList = () => {
+const PokemonList = ({ onSelect }: any) => {
     const loadMore = useRef<HTMLLIElement>(null);
     const entry = useIntersectionObserver(loadMore, {});
 
@@ -33,7 +33,13 @@ const PokemonList = () => {
         <ul className="pokemon-list">
             {data?.pages.map((pokeData) =>
                 pokeData.results.map((pokemon: Pokemon) => {
-                    return <ListItem name={pokemon.name} key={pokemon.name} />;
+                    return (
+                        <ListItem
+                            onSelect={onSelect}
+                            name={pokemon.name}
+                            key={pokemon.name}
+                        />
+                    );
                 })
             )}
             <li ref={loadMore}>Hiden li</li>

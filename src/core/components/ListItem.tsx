@@ -1,28 +1,14 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { useQuery } from 'react-query';
 
 import { colors } from '../theme';
-import { getPokemonData } from 'api';
-
 interface ListItemProps {
     name: string;
+    onSelect(value: string): void;
 }
 
-const ListItem: FC<ListItemProps> = ({ name }) => {
-    const pokemon = useQuery(
-        ['singlePokemon', name],
-        () => getPokemonData(name),
-        {
-            enabled: false,
-        }
-    );
-
-    const handleRefetch = (): void => {
-        pokemon.refetch();
-    };
-
-    return <StyledLi onClick={handleRefetch}>{name}</StyledLi>;
+const ListItem: FC<ListItemProps> = ({ name, onSelect }) => {
+    return <StyledLi onClick={() => onSelect(name)}>{name}</StyledLi>;
 };
 
 export default ListItem;

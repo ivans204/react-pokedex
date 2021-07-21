@@ -1,6 +1,6 @@
 import 'App.scss';
 
-import FlexItem from 'core/components/FlexItem';
+import { FlexItem } from 'core/components/FlexItem.style';
 import PokemonList from 'modules/components/PokemonList';
 import PokemonInfo from 'modules/components/PokemonInfo';
 

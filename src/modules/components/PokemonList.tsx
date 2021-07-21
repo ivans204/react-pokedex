@@ -4,6 +4,8 @@ import useIntersectionObserver from '../../core/hooks/useIntersectionObserver';
 
 import './PokemonList.scss';
 
+import ListItem from 'core/components/ListItem';
+
 import { getPokemons } from 'api';
 
 import { Pokemon } from '../interfaces/interface.pokemon';
@@ -31,7 +33,7 @@ const PokemonList = () => {
         <ul className="pokemon-list">
             {data?.pages.map((pokeData) =>
                 pokeData.results.map((pokemon: Pokemon) => {
-                    return <li key={pokemon.name}>{pokemon.name}</li>;
+                    return <ListItem name={pokemon.name} key={pokemon.name} />;
                 })
             )}
             <li ref={loadMore}>Hiden li</li>

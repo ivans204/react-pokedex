@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { useInfiniteQuery } from 'react-query';
-import useIntersectionObserver from '../../../core/hooks/useIntersectionObserver';
+import useIntersectionObserver from '../../core/hooks/useIntersectionObserver';
 
-import './style.scss';
+import './PokemonList.scss';
 
 import { getPokemons } from 'api';
 
-import { Pokemon } from '../../interfaces/interface.pokemon';
+import { Pokemon } from '../interfaces/interface.pokemon';
 
 const PokemonList = () => {
     const loadMore = useRef<HTMLLIElement>(null);

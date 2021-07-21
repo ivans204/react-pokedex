@@ -2,6 +2,9 @@
     margin: 0;
     max-height: 100%;
     overflow-y: scroll;
+    list-style: none;
+    padding-inline-start: 0;
+    padding: 25px;
 
     li:last-child {
         visibility: hidden;

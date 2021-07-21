@@ -7,7 +7,7 @@ import PokemonInfo from 'modules/components/PokemonInfo';
 function App() {
     return (
         <div className="container">
-            <FlexItem>
+            <FlexItem borderRight>
                 <PokemonInfo />
             </FlexItem>
             <FlexItem>

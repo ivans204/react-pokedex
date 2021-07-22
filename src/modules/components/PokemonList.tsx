@@ -14,10 +14,16 @@ const PokemonList = ({ onSelect }: any) => {
     const loadMore = useRef<HTMLLIElement>(null);
     const entry = useIntersectionObserver(loadMore, {});
 
-    const { fetchNextPage, isLoading, isError, isFetchingNextPage, data } =
-        useInfiniteQuery('pokemons', getPokemons, {
-            getNextPageParam: (lastPage) => lastPage.next,
-        });
+    const {
+        fetchNextPage,
+        isLoading,
+        isError,
+        isFetchingNextPage,
+        hasNextPage,
+        data,
+    } = useInfiniteQuery('pokemons', getPokemons, {
+        getNextPageParam: (lastPage) => lastPage.next,
+    });
 
     useEffect(() => {
         if (entry?.isIntersecting) fetchNextPage();
@@ -25,7 +31,7 @@ const PokemonList = ({ onSelect }: any) => {
         // eslint-disable-next-line
     }, [entry?.isIntersecting, data?.pageParams]);
 
-    if (isLoading || isFetchingNextPage) <h1>Loading...</h1>;
+    if (isLoading) <h1>Loading...</h1>;
 
     if (isError) <h1>Error...</h1>;
 
@@ -42,6 +48,7 @@ const PokemonList = ({ onSelect }: any) => {
                     );
                 })
             )}
+            {isFetchingNextPage && !!hasNextPage && <h1>Loading...</h1>}
             <li ref={loadMore}>Hiden li</li>
         </ul>
     );

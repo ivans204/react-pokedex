@@ -8,7 +8,7 @@ import ListItem from 'core/components/ListItem';
 
 import { getPokemons } from 'api';
 
-import { Pokemon } from '../interfaces/interface.pokemon';
+import { Pokemon } from '../interfaces/interface.pokemonsListResponse';
 
 const PokemonList = ({ onSelect }: any) => {
     const loadMore = useRef<HTMLLIElement>(null);

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, Dispatch, SetStateAction } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import useIntersectionObserver from '../../core/hooks/useIntersectionObserver';
 
@@ -10,7 +10,11 @@ import { getPokemons } from 'api';
 
 import { Pokemon } from '../interfaces/interface.pokemonsListResponse';
 
-const PokemonList = ({ onSelect }: any) => {
+interface PokemonListProps {
+    onSelect: Dispatch<SetStateAction<string>>;
+}
+
+const PokemonList = ({ onSelect }: PokemonListProps) => {
     const loadMore = useRef<HTMLLIElement>(null);
     const entry = useIntersectionObserver(loadMore, {});
 

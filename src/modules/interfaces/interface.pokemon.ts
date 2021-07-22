@@ -1,10 +1,17 @@
-export interface Pokemon {
-    name: string;
-}
-
-export interface PokemonResponse {
-    count: number;
-    next: string | null;
-    prev: string | null;
-    results: Pokemon[];
+export interface IPokemon {
+    data: {
+        id: number;
+        name: string;
+        height: string;
+        sprites: {
+            front_default: string;
+        };
+        types: {
+            slot: number;
+            type: {
+                name: string;
+                url: string;
+            };
+        }[];
+    };
 }

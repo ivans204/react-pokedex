@@ -15,10 +15,10 @@ export default ListItem;
 
 const StyledLi = styled.li`
     padding: 10px 25px;
-    border-bottom: 1px solid ${colors.borderGray};
+    border-top: 1px solid ${colors.borderGray};
     cursor: pointer;
 
-    &:first-of-type {
+    /* &:first-of-type {
         border-top: 2px solid ${colors.borderGray};
-    }
+    } */
 `;

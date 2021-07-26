@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { IPokemon } from 'modules/interfaces/interface.pokemon';
 
 import { Flex } from 'core/components/Flex.style';
+
+import { IPokemon } from 'modules/interfaces/interface.pokemon';
 
 import './PokemonInfo.scss';
 
 import { getPokemonData } from 'api';
+import StatusInfo from './StatusInfo';
 
 const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
     const { data, refetch, isLoading } = useQuery<IPokemon>(
@@ -23,26 +25,9 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
         //eslint-disable-next-line
     }, [pokemonName]);
 
-    if (!!!pokemonName)
-        return (
-            <Flex
-                style={{ width: '100%', height: '100%' }}
-                align={'center'}
-                justify={'center'}
-            >
-                <h1>No data... yet...</h1>
-            </Flex>
-        );
-    if (isLoading)
-        return (
-            <Flex
-                style={{ width: '100%', height: '100%' }}
-                align={'center'}
-                justify={'center'}
-            >
-                <h1>Loading...</h1>
-            </Flex>
-        );
+    if (!!!pokemonName) return <StatusInfo infoMsg="No data... yet..." />;
+
+    if (isLoading) return <StatusInfo infoMsg="Loading..." />;
 
     return (
         <div className="pokemon-info-container">
@@ -74,7 +59,7 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
             </div>
             <div className="info-section">
                 <h2 style={{ borderBottom: '1px solid #e8ecef' }}>Stats</h2>
-                <Flex row wrap>
+                <Flex row wrapp>
                     {pokeData.stats?.map((stat) => (
                         <Flex
                             key={stat.stat.name}

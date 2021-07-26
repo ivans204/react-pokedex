@@ -59,7 +59,7 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
             </div>
             <div className="info-section">
                 <h2 style={{ borderBottom: '1px solid #e8ecef' }}>Stats</h2>
-                <Flex row wrapp>
+                <Flex row fwrap>
                     {pokeData.stats?.map((stat) => (
                         <Flex
                             key={stat.stat.name}

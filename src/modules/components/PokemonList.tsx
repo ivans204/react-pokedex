@@ -1,4 +1,4 @@
-import { useEffect, useRef, Dispatch, SetStateAction } from 'react';
+import { useEffect, useRef, Dispatch, SetStateAction, FC } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import useIntersectionObserver from '../../core/hooks/useIntersectionObserver';
 
@@ -14,7 +14,7 @@ interface PokemonListProps {
     onSelect: Dispatch<SetStateAction<string>>;
 }
 
-const PokemonList = ({ onSelect }: PokemonListProps) => {
+const PokemonList: FC<PokemonListProps> = ({ onSelect }) => {
     const loadMore = useRef<HTMLLIElement>(null);
     const entry = useIntersectionObserver(loadMore, {});
 

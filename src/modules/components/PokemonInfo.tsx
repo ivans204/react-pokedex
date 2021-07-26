@@ -3,12 +3,14 @@ import { useQuery } from 'react-query';
 
 import { Flex } from 'core/components/Flex.style';
 
+import StatusInfo from './StatusInfo';
+
 import { IPokemon } from 'modules/interfaces/interface.pokemon';
 
 import './PokemonInfo.scss';
 
 import { getPokemonData } from 'api';
-import StatusInfo from './StatusInfo';
+import PokemonStat from './PokemonStat';
 
 const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
     const { data, refetch, isLoading } = useQuery<IPokemon>(
@@ -43,33 +45,32 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
                     <img src={pokeData.sprites?.front_default} alt="" />
                 </Flex>
             </div>
+
             <div className="info-section">
                 <h2 style={{ borderBottom: '1px solid #e8ecef' }}>
                     Base Stats
                 </h2>
                 <Flex row>
-                    <Flex column align="center" style={{ marginRight: '10px' }}>
-                        Height
-                        <span>{pokeData.height}</span>
-                    </Flex>
-                    <Flex column align="center" style={{ marginRight: '10px' }}>
-                        Weight <span>{pokeData.weight}</span>
-                    </Flex>
+                    <PokemonStat
+                        statName="Height"
+                        statValue={pokeData.height as string}
+                    />
+                    <PokemonStat
+                        statName="Weight"
+                        statValue={pokeData.weight as string}
+                    />
                 </Flex>
             </div>
+
             <div className="info-section">
                 <h2 style={{ borderBottom: '1px solid #e8ecef' }}>Stats</h2>
                 <Flex row fwrap>
                     {pokeData.stats?.map(({ stat, base_stat }) => (
-                        <Flex
+                        <PokemonStat
                             key={stat.name}
-                            column
-                            align="center"
-                            style={{ flex: '0 1 25%' }}
-                        >
-                            {stat.name}
-                            <span>{base_stat}</span>
-                        </Flex>
+                            statName={stat.name}
+                            statValue={base_stat}
+                        />
                     ))}
                 </Flex>
             </div>

@@ -20,7 +20,6 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
             enabled: !!pokemonName,
         }
     );
-    const pokeData = { ...data?.data };
 
     useEffect(() => {
         refetch();
@@ -35,37 +34,35 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
         <div className="pokemon-info-container">
             <div className="info-section">
                 <Flex row>
-                    <h3>#{pokeData.id}</h3>
+                    <h3>#{data?.id}</h3>
                 </Flex>
 
                 <Flex row>
-                    <h1>{pokeData.name}</h1>
+                    <h1>{data?.name}</h1>
                 </Flex>
                 <Flex>
-                    <img src={pokeData.sprites?.front_default} alt="" />
+                    <img src={data?.sprites?.front_default} alt="" />
                 </Flex>
             </div>
 
             <div className="info-section">
-                <h2 style={{ borderBottom: '1px solid #e8ecef' }}>
-                    Base Stats
-                </h2>
+                <h2 className="info-section_name">Base Stats</h2>
                 <Flex row>
                     <PokemonStat
                         statName="Height"
-                        statValue={pokeData.height as string}
+                        statValue={data?.height as string}
                     />
                     <PokemonStat
                         statName="Weight"
-                        statValue={pokeData.weight as string}
+                        statValue={data?.weight as string}
                     />
                 </Flex>
             </div>
 
             <div className="info-section">
-                <h2 style={{ borderBottom: '1px solid #e8ecef' }}>Stats</h2>
+                <h2 className="info-section_name">Stats</h2>
                 <Flex row fwrap>
-                    {pokeData.stats?.map(({ stat, base_stat }) => (
+                    {data?.stats.map(({ stat, base_stat }) => (
                         <PokemonStat
                             key={stat.name}
                             statName={stat.name}
@@ -73,6 +70,11 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
                         />
                     ))}
                 </Flex>
+            </div>
+
+            <div className="info-section">
+                <h2 className="info-section_name">Evolutions</h2>
+                <Flex row fwrap></Flex>
             </div>
         </div>
     );

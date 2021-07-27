@@ -11,5 +11,13 @@ export const getPokemons = async ({
 };
 
 export const getPokemonData: any = async (pokemonName: string) => {
-    return await axios.get(`${baseUrl}/pokemon/${pokemonName}`);
+    return await axios
+        .get(`${baseUrl}/pokemon/${pokemonName}`)
+        .then(responseBody);
+};
+
+export const getPokemonSpeciesData: any = async (pokemonName: string) => {
+    return await axios
+        .get(`${baseUrl}/pokemon-species/${pokemonName}`)
+        .then(responseBody);
 };

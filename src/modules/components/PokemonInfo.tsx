@@ -46,7 +46,7 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
             </div>
 
             <div className="info-section">
-                <h2 className="info-section_name">Base Stats</h2>
+                <h2 className="info-section_title">Base Stats</h2>
                 <Flex row>
                     <PokemonStat
                         statName="Height"
@@ -60,7 +60,7 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
             </div>
 
             <div className="info-section">
-                <h2 className="info-section_name">Stats</h2>
+                <h2 className="info-section_title">Stats</h2>
                 <Flex row fwrap>
                     {data?.stats.map(({ stat, base_stat }) => (
                         <PokemonStat
@@ -73,7 +73,7 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
             </div>
 
             <div className="info-section">
-                <h2 className="info-section_name">Evolutions</h2>
+                <h2 className="info-section_title">Evolutions</h2>
                 <Flex row fwrap></Flex>
             </div>
         </div>

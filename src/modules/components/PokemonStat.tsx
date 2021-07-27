@@ -6,7 +6,7 @@ import './PokemonStat.scss';
 
 interface PokemonStatProps {
     statName: string;
-    statValue: number | string;
+    statValue: number | string | string[];
 }
 
 const PokemonStat: FC<PokemonStatProps> = ({ statName, statValue }) => {

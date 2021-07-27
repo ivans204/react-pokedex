@@ -1,47 +1,71 @@
 import { useEffect } from 'react';
-import { useQuery } from 'react-query';
+import { useQueries } from 'react-query';
 
 import { Flex } from 'core/components/Flex.style';
 
 import StatusInfo from './StatusInfo';
 
-import { IPokemon } from 'modules/interfaces/interface.pokemon';
+import { IPokemon, IPokemonSpecie } from 'modules/interfaces/interface.pokemon';
 
 import './PokemonInfo.scss';
 
-import { getPokemonData } from 'api';
+import { getPokemonData, getPokemonSpeciesData } from 'api';
 import PokemonStat from './PokemonStat';
 
+interface QueryResponse<T> {
+    data: T;
+    refetch(): void;
+    isLoading: boolean;
+}
+
 const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
-    const { data, refetch, isLoading } = useQuery<IPokemon>(
-        ['pokemon', pokemonName],
-        () => getPokemonData(pokemonName),
+    const result = useQueries([
         {
-            enabled: !!pokemonName,
-        }
-    );
+            queryKey: ['pokemon', pokemonName],
+            queryFn: () => getPokemonData(pokemonName),
+        },
+        {
+            queryKey: ['pokemon-specie', pokemonName],
+            queryFn: () => getPokemonSpeciesData(pokemonName),
+        },
+    ]);
+
+    const {
+        data: statsData,
+        refetch: statsRefetch,
+        isLoading: statsIsLoading,
+    } = result[0] as QueryResponse<IPokemon>;
+
+    const {
+        data: speciesData,
+        refetch: speciesRefetch,
+        isLoading: speciesIsLoading,
+    } = result[1] as QueryResponse<IPokemonSpecie>;
 
     useEffect(() => {
-        refetch();
+        statsRefetch();
+        speciesRefetch();
         //eslint-disable-next-line
     }, [pokemonName]);
 
     if (!!!pokemonName) return <StatusInfo infoMsg="No data... yet..." />;
 
-    if (isLoading) return <StatusInfo infoMsg="Loading..." />;
+    if (statsIsLoading || speciesIsLoading)
+        return <StatusInfo infoMsg="Loading..." />;
 
     return (
+        // <p>{}</p>
         <div className="pokemon-info-container">
             <div className="info-section">
                 <Flex row>
-                    <h3>#{data?.id}</h3>
+                    <h3>#{statsData?.id}</h3>
                 </Flex>
 
                 <Flex row>
-                    <h1>{data?.name}</h1>
+                    <h1>{statsData?.name}</h1>
                 </Flex>
                 <Flex>
-                    <img src={data?.sprites?.front_default} alt="" />
+                    <img src={statsData?.sprites?.front_default} alt="" />
                 </Flex>
             </div>
 
@@ -50,11 +74,23 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
                 <Flex row>
                     <PokemonStat
                         statName="Height"
-                        statValue={data?.height as string}
+                        statValue={statsData?.height as string}
                     />
                     <PokemonStat
                         statName="Weight"
-                        statValue={data?.weight as string}
+                        statValue={statsData?.weight as string}
+                    />
+                    <PokemonStat
+                        statName="Generation"
+                        statValue={speciesData.generation.name
+                            .slice(-1)
+                            .toUpperCase()}
+                    />
+                    <PokemonStat
+                        statName="Type"
+                        statValue={statsData.types.map(
+                            ({ type }) => type.name + '/'
+                        )}
                     />
                 </Flex>
             </div>
@@ -62,7 +98,7 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
             <div className="info-section">
                 <h2 className="info-section_title">Stats</h2>
                 <Flex row fwrap>
-                    {data?.stats.map(({ stat, base_stat }) => (
+                    {statsData?.stats.map(({ stat, base_stat }) => (
                         <PokemonStat
                             key={stat.name}
                             statName={stat.name}

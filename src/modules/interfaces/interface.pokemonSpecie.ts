@@ -4,6 +4,9 @@ export interface IPokemonSpecie {
         name: string;
         url: string;
     };
+    evolution_chain: {
+        url: string;
+    };
 }
 
 export interface FlavorTextEntry {

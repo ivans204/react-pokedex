@@ -6,35 +6,21 @@ export interface IPokemon {
     sprites: {
         front_default: string;
     };
-    types: {
-        slot: number;
-        type: {
-            name: string;
-            url: string;
-        };
-    }[];
-    stats: {
-        base_stat: number;
-        stat: {
-            name: string;
-            url: string;
-        };
-    }[];
+    types: Types[];
+    stats: Stats[];
 }
 
-export interface IPokemonSpecie {
-    flavor_text_entries: {
-        flavor_text: string;
-        language: {
-            name: string;
-            url: string;
-        };
-        version: {
-            name: string;
-            url: string;
-        };
-    }[];
-    generation: {
+export interface Types {
+    slot: number;
+    type: {
+        name: string;
+        url: string;
+    };
+}
+
+export interface Stats {
+    base_stat: number;
+    stat: {
         name: string;
         url: string;
     };

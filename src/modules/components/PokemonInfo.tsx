@@ -5,7 +5,8 @@ import { Flex } from 'core/components/Flex.style';
 
 import StatusInfo from './StatusInfo';
 
-import { IPokemon, IPokemonSpecie } from 'modules/interfaces/interface.pokemon';
+import { IPokemon } from 'modules/interfaces/interface.pokemon';
+import { IPokemonSpecie } from 'modules/interfaces/interface.pokemonSpecie';
 
 import './PokemonInfo.scss';
 
@@ -54,7 +55,6 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
         return <StatusInfo infoMsg="Loading..." />;
 
     return (
-        // <p>{}</p>
         <div className="pokemon-info-container">
             <div className="info-section">
                 <Flex row>

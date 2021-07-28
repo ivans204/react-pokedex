@@ -21,3 +21,7 @@ export const getPokemonSpeciesData: any = async (pokemonName: string) => {
         .get(`${baseUrl}/pokemon-species/${pokemonName}`)
         .then(responseBody);
 };
+
+export const getPokemonEvolutions: any = async (url: string) => {
+    return await axios.get(url).then(responseBody);
+};

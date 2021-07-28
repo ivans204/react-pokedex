@@ -67,6 +67,9 @@ const PokemonInfo = ({ pokemonName }: { pokemonName: string }) => {
                 <Flex>
                     <img src={statsData?.sprites?.front_default} alt="" />
                 </Flex>
+                <Flex>
+                    <p>{speciesData.flavor_text_entries[6].flavor_text}</p>
+                </Flex>
             </div>
 
             <div className="info-section">
